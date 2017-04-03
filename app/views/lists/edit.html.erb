@@ -1,0 +1,8 @@
+<div class="col-md-6 col-md-offset-3 jumbotron">
+	<h2><%= @list.title %></h2>
+
+	<%= render 'form', list: @list %>
+
+	<%= link_to 'Show list', @list, class: "btn btn-primary" %>
+	<%= link_to 'Back', lists_path, class: "btn btn-primary" %>
+</div>

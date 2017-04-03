@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <div class="col-md-6 col-md-offset-3 jumbotron">
+  	<div class="col-md-12">
+  		<h1>My lists</h1>
+  
+	  	<% @lists.each do |list| %>
+				<div class="row item">
+	    		<h2><%= link_to list.title, list %></h2>
+	    	</div>
+	  	<% end %>
+  	</div>
+  </div>
+<% else %>
+  <%= render 'layouts/starting_page' %>
+<% end %>

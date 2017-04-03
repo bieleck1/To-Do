@@ -1,0 +1,95 @@
+<div class="col-md-6 col-md-offset-3 jumbotron">
+  <h2><%= @list.title %></h2>
+
+  <% if user_signed_in? %>
+
+    <p><%= "Link to your list: " + request.original_url %></p>
+
+    <ol>
+      <% @list.tasks.each do |task| %>
+        <% if task.done? %>
+
+          <div class="row item">
+
+            <div class="col-md-8">
+              <li><strike><%= task.title %></strike></li>
+            </div>
+
+            <div class="col-md-2">
+              <p><%= link_to complete_list_task_path(@list, task), method: :patch do %></p>
+              <i class="fa fa-lg fa-check"></i>
+              <% end %>
+            </div>
+
+            <div class="col-md-2">
+              <p><%= link_to list_task_path(@list, task), method: :delete, data: { confirm: 'Are you sure?' } do %></p>
+                <i class="fa fa-lg fa-trash"></i>
+              <% end %>
+            </div>
+
+          </div>
+
+        <% else %>
+
+          <div class="row item">
+
+            <div class="col-md-8">
+              <li><%= task.title %></li>
+            </div>
+
+            <div class="col-md-2">
+              <p><%= link_to complete_list_task_path(@list, task), method: :patch do %></p>
+              <i class="fa fa-lg fa-check"></i>
+              <% end %>
+            </div>
+
+            <div class="col-md-2">
+              <p><%= link_to list_task_path(@list, task), method: :delete, data: { confirm: 'Are you sure?' } do %></p>
+                <i class="fa fa-lg fa-trash"></i>
+              <% end %>
+            </div>
+
+          </div>
+
+        <% end %>
+      <% end %>
+    </ol>
+
+    <%= simple_form_for([@list, @list.tasks.build]) do |task| %>
+      <div class="field">
+        <%= task.text_field :title %>
+      </div>
+
+      <p><%= task.submit("Add a Task") %></p>
+    <% end %>
+
+    <%= link_to 'Change list title', edit_list_path(@list), class: "btn btn-primary" %>
+    <%= link_to 'Delete list', @list, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+    <%= link_to 'Back', lists_path, class: "btn btn-primary" %>
+
+  <% else %>
+
+    <ol>
+      <% @list.tasks.each do |task| %>
+        <% if task.done? %>
+
+          <div class="row item">
+            <div class="col-md-8">
+              <li><strike><%= task.title %></strike></li>
+            </div>
+          </div>
+
+        <% else %>
+
+          <div class="row item">
+            <div class="col-md-8">
+              <li><%= task.title %></li>
+            </div>
+          </div>
+          
+        <% end %>
+      <% end %>
+    </ol>
+
+  <% end %>
+</div>
