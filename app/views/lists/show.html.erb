@@ -3,7 +3,7 @@
 
   <% if user_signed_in? and current_user.id == @list.user_id %>
     <p><%= "Link to your list: " + request.original_url %></p>
-
+    
     <div class="container">
       <ol>
         <%= render @list.tasks %>
@@ -18,7 +18,7 @@
   <% else %>
     <ol>
       <% @list.tasks.each do |task| %>
-        <%= render 'tasks/task', task: task %>
+        <%= render 'tasks/task2', task: task %>
       <% end %>
     </ol>
   <% end %>
