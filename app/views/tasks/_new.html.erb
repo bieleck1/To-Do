@@ -1,0 +1,9 @@
+<%= form_for([@list, @list.tasks.build], remote: true) do |task| %>
+  <div class="field">
+    <%= task.text_field :title %>
+  </div>
+
+  <div class="actions">
+  	<p><%= task.submit("Add a Task") %></p>
+  </div>
+<% end %>

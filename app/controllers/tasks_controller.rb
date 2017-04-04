@@ -4,25 +4,27 @@ class TasksController < ApplicationController
 
 	def create
 		respond_to do |format|
-			if(task_params[:title] != "")
-				@task = @list.tasks.create(task_params)
-
-				format.html { redirect_to list_path(@list), notice: 'Task added' }
+			@task = @list.tasks.create(task_params)
+			if @task.save
+				ListChannel.broadcast(@task)
+				format.html { redirect_to @list, notice: 'Task added' }
 			else
-				format.html { redirect_to list_path(@list), notice: 'Enter task name' }
+				format.html { redirect_to @list, notice: 'Enter task name' }
 			end
 		end
 	end
 
 	def complete
 		@task.update_attribute(:is_done, true)
-		redirect_to list_path(@list)
+		ListChannel.broadcast(@task)
+		redirect_to @list
 	end
 
 	def destroy
     @task.destroy
+		ListChannel.broadcast(@task)
     respond_to do |format|
-      format.html { redirect_to list_path(@list), notice: 'Task deleted' }
+      format.html { redirect_to @list, notice: 'Task deleted' }
     end
 	end
 

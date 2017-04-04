@@ -1,0 +1,41 @@
+<% if task.done? %>
+  <div class="row item">
+
+    <div class="col-md-8">
+      <li><strike><%= task.title %></strike></li>
+    </div>
+
+    <div class="col-md-2">
+      <p><%= link_to complete_list_task_path(task.list, task), method: :patch do %></p>
+        <i class="fa fa-lg fa-check"></i>
+      <% end %>
+    </div>
+
+    <div class="col-md-2">
+      <p><%= link_to list_task_path(task.list, task), method: :delete, data: { confirm: 'Are you sure?' } do %></p>
+        <i class="fa fa-lg fa-trash"></i>
+      <% end %>
+    </div>
+
+  </div>
+<% else %>
+  <div class="row item">
+
+    <div class="col-md-8">
+      <li><%= task.title %></li>
+    </div>
+
+    <div class="col-md-2">
+      <p><%= link_to complete_list_task_path(task.list, task), method: :patch do %></p>
+        <i class="fa fa-lg fa-check"></i>
+      <% end %>
+    </div>
+
+    <div class="col-md-2">
+      <p><%= link_to list_task_path(task.list, task), method: :delete, data: { confirm: 'Are you sure?' } do %></p>
+        <i class="fa fa-lg fa-trash"></i>
+      <% end %>
+    </div>
+
+  </div>
+<% end %>

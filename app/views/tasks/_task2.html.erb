@@ -1,0 +1,15 @@
+<% if task.done? %>
+  <div class="row item">
+    <div class="col-md-8">
+      <li><strike><%= task.title %></strike></li>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="row item">
+    <div class="col-md-8">
+      <li><%= task.title %></li>
+    </div>
+  </div>
+<% end %>
