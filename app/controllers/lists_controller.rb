@@ -4,6 +4,7 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
+    
     if user_signed_in?
       @lists = List.where(:user_id => current_user.id).order("created_at DESC")
     end
